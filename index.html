@@ -19,9 +19,9 @@
 	        <input type="hidden" ng-model="newnotes.id" />
      		<input type="button" value="Save" ng-click="saveNewNote()"/>
 	</form>
-	
+
 	<br>
-	
+
 		<table>
 			<thead>
 				<tr>
@@ -36,7 +36,7 @@
 				<tr ng-repeat="note in notes">
 					<td>{{note.title}}</td>
 					<td>{{note.text}}</td>
-					<td><a  href="#" ng-click="editNote(note.id)">edit</a> | 
+					<td><a  href="#" ng-click="editNote(note.id)">edit</a> |
 	        <a href="#" ng-click="deleteNote(note.id)">delete</a></td>
 				</tr>
 			</tbody>
@@ -54,7 +54,7 @@
         <input type="hidden" ng-model="newtodos.id" />
  		<input type="button" value="Save" ng-click="saveNewTodo()"/>
 	</form>
-	
+
 	<br>
 	  <ul>
 	    <li ng-repeat="todo in todos">

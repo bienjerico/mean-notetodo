@@ -1,64 +1,47 @@
 // Define the `noteApp` module
 var app = angular.module('app', []);
 
-var noteData = [
-    {
-      id: 0,
-      title: 'Nexus S',
-      text: 'Fast just got faster with Nexus S.'
-    }, {
-      id: 1,
-      title: 'Motorola XOOM™ with Wi-Fi',
-      text: 'The Next, Next Generation tablet.'
-    }, {
-      id: 2,
-      title: 'MOTOROLA XOOM™',
-      text: 'The Next, Next Generation tablet.'
-    }
-  ];
-
 // Define the `NoteListController` controller on the `noteApp` module
-app.controller('NoteListController', function NoteListController($scope) {
+app.controller('NoteListController', function NoteListController($scope,$http) {
 
-  $scope.notes = noteData;
+  var displayNote = function(){
+    $http.get('/api/note').success(function(res){
+      console.log("I got the data I requested");
+      $scope.notes = res;
+    });
+  }
 
-  var idlastnote = 3;
+  // on load note
+  displayNote();
 
-  $scope.saveNewNote = function(){
-
-    // new
-    if($scope.newnotes.id == null) {
-           $scope.newnotes.id = idlastnote++;
-           $scope.notes.push($scope.newnotes);  
-    // update
+  $scope.saveNewNote = function(id){
+    // save new note
+    if(id == null) {
+          $http.post('/api/note',$scope.newnotes).success(function(res){
+            console.log(res);
+            displayNote();
+          });
+    // save update
      } else {
-          for(i in $scope.notes) {
-                  if($scope.notes[i].id == $scope.newnotes.id) {
-                      $scope.notes[i] = $scope.newnotes;
-                  }
-           }           
+           $http.put('/api/note/'+ id,$scope.newnotes).success(function(res){
+              displayNote();
+           });
      }
-
       $scope.newnotes = {};
   }
 
+  // delete note
   $scope.deleteNote = function(id) {
-        
-        for(i in $scope.notes) {
-            if($scope.notes[i].id == id) {
-                $scope.notes.splice(i,1);
-                $scope.newnotes = {};
-            }
-        }
-        
+        $http.delete('/api/note/'+id).success(function(res){
+            displayNote();
+        });
     }
 
+  // edit note
   $scope.editNote = function(id) {
-      for(i in $scope.notes) {
-          if($scope.notes[i].id == id) {
-              $scope.newnotes = angular.copy($scope.notes[i]);
-          }
-      }
+      $http.get('/api/note/'+id).success(function(res){
+          $scope.newnotes = res;
+      });
   }
 
   $scope.propertyName = 'title';
@@ -71,53 +54,57 @@ app.controller('NoteListController', function NoteListController($scope) {
 
 });
 
-
-
-
-var todoData = [
-    {
-      id: 0,
-      entry: 'Nexus S',
-      che: false
-    }, {
-      id: 1,
-      entry: 'Motorola XOOM™ with Wi-Fi',
-      che: true
-    }, {
-      id: 2,
-      entry: 'MOTOROLA XOOM™',
-      che: false
-    }
-  ];
-
 // Define the `TodoListController` controller on the `todoApp` module
-app.controller('TodoListController', function TodoListController($scope) {
+app.controller('TodoListController', function TodoListController($scope,$http) {
 
-  $scope.todos = todoData;
+  var displayTodo = function(){
+    $http.get('/api/todo').success(function(res){
+      console.log("I got the data I requested");
+      $scope.todos = res;
+    });
+  }
 
+  // on load todo
+  displayTodo();
 
-  var idlasttodo = 3;
-
-  $scope.saveNewTodo = function(){
+  $scope.saveNewTodo = function(id){
     // new
-    if($scope.newtodos.id == null) {
-           $scope.newtodos.id = idlasttodo++;
-           $scope.todos.push($scope.newtodos);  
+    if(id == null) {
+           $http.post('/api/todo',$scope.newtodos).success(function(response){
+             console.log(response);
+             displayTodo();
+           });
     // update
      } else {
-          for(i in $scope.todos) {
-                  if($scope.todos[i].id == $scope.newtodos.id) {
-                      $scope.todos[i] = $scope.newtodos;
-                  }
-           }           
+       $http.put('/api/todo/'+ id,$scope.newtodos).success(function(res){
+          displayTodo();
+       });
      }
 
       $scope.newtodos = {};
   }
 
+  // delete todo
+  $scope.deleteTodo = function(id) {
+        $http.delete('/api/todo/'+id).success(function(res){
+            displayTodo();
+        });
+    }
 
+  // edit note
+  $scope.editTodo = function(id) {
+      $http.get('/api/todo/'+id).success(function(res){
+          $scope.newtodos = res;
+      });
+  }
+
+  $scope.isDone = function(id,$scope){
+    console.log($scope);
+    $http.put('/api/todo/'+id,$scope).success(function(res){
+      console.log(res);
+      displayTodo();
+    });
+  }
 
 
 });
-
-

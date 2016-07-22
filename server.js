@@ -12,7 +12,8 @@ app.use(express.static(__dirname + "/public"));
 
 
 app.get('/',function(req,res){
-  res.send("welcome");
+  // res.send("welcome");
+  res.sendFile('/index.html');
   console.log("welcome");
 })
 
