@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html >
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body >
+
+
+<div ng-app="app">
+
+	<h1>NOTE</h1>
+	<div ng-controller="NoteListController">
+
+	<form>
+			<input type="text" name="title" ng-model="newnotes.title" placeholder="Title">
+			<input type="text" name="text" ng-model="newnotes.text"  placeholder="Text">
+	        <input type="hidden" ng-model="newnotes.id" />
+     		<input type="button" value="Save" ng-click="saveNewNote()"/>
+	</form>
+	
+	<br>
+	
+	  <ul>
+	    <li ng-repeat="note in notes">
+	      <span>{{note.title}}</span>
+	      <p>{{note.text}}</p>
+          <a  href="#" ng-click="editNote(note.id)">edit</a> | 
+        <a href="#" ng-click="deleteNote(note.id)">delete</a>
+	    </li>
+	  </ul>
+	</div>
+
+
+	<h1>TODO</h1>
+
+	<div ng-controller="TodoListController">
+
+	<form>
+		<input type="text" name="entry" ng-model="newtodos.entry" placeholder="Entry">
+        <input type="hidden" ng-model="newtodos.id" />
+ 		<input type="button" value="Save" ng-click="saveNewTodo()"/>
+	</form>
+	
+	<br>
+	  <ul>
+	    <li ng-repeat="todo in todos">
+	      <span>{{todo.entry}}</span>
+	      <input type="checkbox" ng-model="todo.che">
+	    </li>
+	  </ul>
+	</div>
+</div>
+
+</body>
+</html>
