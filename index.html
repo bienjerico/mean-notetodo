@@ -14,22 +14,34 @@
 	<div ng-controller="NoteListController">
 
 	<form>
-			<input type="text" name="title" ng-model="newnotes.title" placeholder="Title">
-			<input type="text" name="text" ng-model="newnotes.text"  placeholder="Text">
+			<input type="text" name="title" ng-model="newnotes.title" placeholder="Title" >
+			<input type="text" name="text" ng-model="newnotes.text"  placeholder="Text" ng-click="sortBy('text')">
 	        <input type="hidden" ng-model="newnotes.id" />
      		<input type="button" value="Save" ng-click="saveNewNote()"/>
 	</form>
 	
 	<br>
 	
-	  <ul>
-	    <li ng-repeat="note in notes">
-	      <span>{{note.title}}</span>
-	      <p>{{note.text}}</p>
-          <a  href="#" ng-click="editNote(note.id)">edit</a> | 
-        <a href="#" ng-click="deleteNote(note.id)">delete</a>
-	    </li>
-	  </ul>
+		<table>
+			<thead>
+				<tr>
+					<td><span ng-click="sortBy('title')">Title</span>
+					<span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span></td>
+					<td><span ng-click="sortBy('title')">Text</span>
+					<span class="sortorder" ng-show="propertyName === 'text'" ng-class="{reverse: reverse}"></span></td>
+					<td>Option</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="note in notes">
+					<td>{{note.title}}</td>
+					<td>{{note.text}}</td>
+					<td><a  href="#" ng-click="editNote(note.id)">edit</a> | 
+	        <a href="#" ng-click="deleteNote(note.id)">delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+
 	</div>
 
 
