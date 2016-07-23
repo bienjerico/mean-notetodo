@@ -11,9 +11,7 @@
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
     <script src="js/jquery-1.12.4.js"></script>
-    <script src="js/jquery-ui.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,81 +23,87 @@
       .c-pointer {
         cursor: pointer;;
       }
+      .form-group {
+        padding: 0px 5px 0px 5px;
+      }
     </style>
-    <script>
-      $( function() {
-        $( "#tabs" ).tabs();
-      } );
-    </script>
   </head>
   <body  ng-app="app">
     <div class="container">
-      <div id="tabs">
-        <ul>
-          <li><a href="#tabs-1">Note</a></li>
-          <li><a href="#tabs-2">Todo</a></li>
-        </ul>
-        <div id="tabs-1">
-          	<div ng-controller="NoteListController">
-            	<form class="form-horizontal">
-                <div class="form-group">
-            			<input type="text" name="title" ng-model="newnotes.title" placeholder="Enter your title..." class="form-control">
-                </div>
-                <div class="form-group">
-            			<textarea name="text" ng-model="newnotes.text"  placeholder="Enter your text..." class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-            	    <input type="hidden" ng-model="newnotes._id" />
-                 	<input type="button" value="Save" ng-click="saveNewNote(newnotes._id)" class="btn btn-primary btn-block">
-                </div>
-            	</form>
-            	<div class="clearfix">&nbsp;</div>
-              <div class="panel panel-default" ng-repeat="note in notes  | orderBy:'-date'">
-                <div class="panel-heading c-pointer"  ng-click="editNote(note._id)" title="Edit">
-                  <h3 class="panel-title">{{note.title}}</h3>
-                </div>
-                <div class="panel-body">
-                  {{note.text}}
-                  <div class="clearfix">
-                    <div  class="pull-right">
-                      <a href="#" ng-click="deleteNote(note._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                      &nbsp;
-                      <a href="#tabs-2" ng-click="switchNoteToTodo(note)" title = "Switch to Todo"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          	</div>
-        </div>
-        <div id="tabs-2">
-          	<div ng-controller="TodoListController">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <input type="text" name="entry" ng-model="newtodos.entry" placeholder="Enter your entry..."  class="form-control">
-                  </div>
-                  <div class="form-group">
-               		   <input type="button" value="Save" ng-click="saveNewTodo(newtodos._id)" class="btn btn-primary btn-block">
-                  </div>
-                </form>
-                <div class="clearfix">&nbsp;</div>
-                <ul class="list-group">
-                  <li class="list-group-item" ng-repeat="todo in todos">
-                    <input type="checkbox" ng-model="todo.checkbox" ng-change="isDone(todo._id,todo)" title=" Is Done">
-                    &nbsp;
-                    <span ng-click="editTodo(todo._id)" class="c-pointer" title="Edit">{{todo.entry}}</span>
-                    <div class="clearfix">
-                      <div class="pull-right">
-                        <a href="#" ng-click="deleteTodo(todo._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                        &nbsp;
-                        <a href="#tabs-1" ng-click="switchTodoToNote(todo)" title = "Switch to Note"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+    <div class="clearfix">&nbsp;</div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="panel panel-warning">
+            <div class="panel-heading text-center"><strong>Note</strong></div>
+            <div class="panel-body">
+                  <div ng-controller="NoteListController">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <input type="text" name="title" ng-model="newnotes.title" placeholder="Enter your title..." class="form-control" >
+                      </div>
+                      <div class="form-group">
+                        <textarea name="text" ng-model="newnotes.text"  placeholder="Enter your text..." class="form-control"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <input type="hidden" ng-model="newnotes._id" />
+                        <input type="button" value="Save" ng-click="saveNewNote(newnotes._id)" class="btn btn-warning btn-block">
+                      </div>
+                    </form>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="panel panel-default" ng-repeat="note in notes  | orderBy:'-date'">
+                      <div class="panel-heading c-pointer"  ng-click="editNote(note._id)" title="Edit">
+                        <h3 class="panel-title">{{note.title}}</h3>
+                      </div>
+                      <div class="panel-body">
+                        {{note.text}}
+                        <div class="clearfix">
+                          <div  class="pull-right">
+                            <a href="#" ng-click="deleteNote(note._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                            &nbsp;
+                            <a href="#" ng-click="switchNoteToTodo(note)" title = "Switch to Todo"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </li>
-                </ul>
-          	</div>
-
+                  </div>
+            </div>
         </div>
       </div>
+        <div class="col-sm-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading text-center"><strong>Todo</strong></div>
+            <div class="panel-body">
+              	<div ng-controller="TodoListController">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <input type="text" name="entry" ng-model="newtodos.entry" placeholder="Enter your entry..."  class="form-control">
+                      </div>
+                      <div class="form-group">
+                   		   <input type="button" value="Save" ng-click="saveNewTodo(newtodos._id)" class="btn btn-primary btn-block">
+                      </div>
+                    </form>
+                    <div class="clearfix">&nbsp;</div>
+                    <ul class="list-group">
+                      <li class="list-group-item" ng-repeat="todo in todos">
+                        <input type="checkbox" ng-model="todo.checkbox" ng-change="isDone(todo._id,todo)" title=" Is Done">
+                        &nbsp;
+                        <span ng-click="editTodo(todo._id)" class="c-pointer" title="Edit">{{todo.entry}}</span>
+                        <div class="clearfix">
+                          <div class="pull-right">
+                            <a href="#" ng-click="deleteTodo(todo._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                            &nbsp;
+                            <a href="#" ng-click="switchTodoToNote(todo)" title = "Switch to Note"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+              	</div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+
     </div>
 
     <script src="js/angular.min.js"></script>
