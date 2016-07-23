@@ -16,7 +16,7 @@
 
   	<form>
   			<input type="text" name="title" ng-model="newnotes.title" placeholder="Title" >
-  			<input type="text" name="text" ng-model="newnotes.text"  placeholder="Text" ng-click="sortBy('text')">
+  			<input type="text" name="text" ng-model="newnotes.text"  placeholder="Text">
   	    <input type="hidden" ng-model="newnotes._id" />
        	<input type="button" value="Save" ng-click="saveNewNote(newnotes._id)"/>
   	</form>
@@ -26,19 +26,26 @@
   		<table>
   			<thead>
   				<tr>
-  					<td><span ng-click="sortBy('title')">Title</span>
-  					<span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span></td>
-  					<td><span ng-click="sortBy('title')">Text</span>
-  					<span class="sortorder" ng-show="propertyName === 'text'" ng-class="{reverse: reverse}"></span></td>
-  					<td>Option</td>
+  					<td>
+                <span ng-click="sortBy('title')">Title</span>
+			          <span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span>
+            </td>
+  					<td>
+                <span ng-click="sortBy('text')">Text</span>
+  					    <span class="sortorder" ng-show="propertyName === 'text'" ng-class="{reverse: reverse}"></span>
+            </td>
+            <td>Option</td>
   				</tr>
   			</thead>
   			<tbody>
-  				<tr ng-repeat="note in notes">
-  					<td>{{note.title}}</td>
-  					<td>{{note.text}}</td>
-  					<td><a  href="#" ng-click="editNote(note._id)">edit</a> |
-  	        <a href="#" ng-click="deleteNote(note._id)">delete</a></td>
+  				<tr ng-repeat="note in notes  | orderBy:propertyName:reverse">
+              <td>{{note.title}}</td>
+              <td>{{note.text}}</td>
+              <td>
+                <a  href="#" ng-click="editNote(note._id)">edit</a> |
+                <a href="#" ng-click="deleteNote(note._id)">delete</a> |
+                <a href="#" ng-click="switchNoteToTodo(note)">switch todo</a>
+              </td>
   				</tr>
   			</tbody>
   		</table>
@@ -67,8 +74,11 @@
           <tr ng-repeat="todo in todos">
             <td><input type="checkbox" ng-model="todo.checkbox" ng-change="isDone(todo._id,todo)"></td>
             <td>{{todo.entry}}</td>
-            <td><a  href="#" ng-click="editTodo(todo._id)">edit</a> |
-            <a href="#" ng-click="deleteTodo(todo._id)">delete</a></td>
+            <td>
+                <a  href="#" ng-click="editTodo(todo._id)">edit</a> |
+                <a href="#" ng-click="deleteTodo(todo._id)">delete</a>
+                <a href="#" ng-click="switchTodoToNote(todo)">switch note</a>
+            </td>
           </tr>
         </tbody>
       </table>
