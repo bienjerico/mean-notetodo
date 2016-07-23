@@ -8,7 +8,6 @@ app.controller('NoteListController', function NoteListController($scope,$http,da
       var entrytotitle =  dataTodoToNote.getData();
       console.log("data from entry: "+entrytotitle);
       $scope.newnotes = { title:entrytotitle };
-
   });
 
   // switch data from note to todo
@@ -77,7 +76,8 @@ app.controller('TodoListController', function TodoListController($scope,$http,da
       var titletext =  dataNoteToTodo.getData();
       console.log("data from note: "+titletext);
       $scope.newtodos = { entry:titletext };
-
+      // var myEl = app.element( document.querySelector( '#entry' ) );
+              // $("#entry").attr("autofocus",true);
   });
 
   // switch data from todo to note
@@ -164,3 +164,17 @@ app.factory('dataTodoToNote',function($rootScope){
   };
   return service;
 });
+
+
+app.module('utils.autofocus', [])
+
+.directive('autofocus', ['$timeout', function($timeout) {
+  return {
+    restrict: 'A',
+    link : function($scope, $element) {
+      $timeout(function() {
+        $element[0].focus();
+      });
+    }
+  }
+}]);
