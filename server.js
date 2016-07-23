@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 var note = require('./router/note');
 var todo = require('./router/todo');
 
+// route to api
 app.use('/api', note);
 app.use('/api', todo);
 
