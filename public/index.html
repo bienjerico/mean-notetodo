@@ -10,7 +10,10 @@
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,13 +26,20 @@
         cursor: pointer;;
       }
     </style>
+    <script>
+      $( function() {
+        $( "#tabs" ).tabs();
+      } );
+    </script>
   </head>
   <body  ng-app="app">
-
     <div class="container">
-
-
-          	<h1>NOTE</h1>
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">Note</a></li>
+          <li><a href="#tabs-2">Todo</a></li>
+        </ul>
+        <div id="tabs-1">
           	<div ng-controller="NoteListController">
             	<form class="form-horizontal">
                 <div class="form-group">
@@ -54,15 +64,14 @@
                     <div  class="pull-right">
                       <a href="#" ng-click="deleteNote(note._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                       &nbsp;
-                      <a href="#" ng-click="switchNoteToTodo(note)" title = "Switch to Todo"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                      <a href="#tabs-2" ng-click="switchNoteToTodo(note)" title = "Switch to Todo"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
                     </div>
                   </div>
                 </div>
               </div>
           	</div>
-
-
-          	<h1>TODO</h1>
+        </div>
+        <div id="tabs-2">
           	<div ng-controller="TodoListController">
                 <form class="form-horizontal">
                   <div class="form-group">
@@ -82,23 +91,22 @@
                       <div class="pull-right">
                         <a href="#" ng-click="deleteTodo(todo._id)" title = "Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                         &nbsp;
-                        <a href="#" ng-click="switchTodoToNote(todo)" title = "Switch to Note"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                        <a href="#tabs-1" ng-click="switchTodoToNote(todo)" title = "Switch to Note"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
                       </div>
                     </div>
                   </li>
                 </ul>
           	</div>
 
+        </div>
+      </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="js/angular.min.js"></script>
 
-    <script src="app.js"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/app.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
 
   </body>
 </html>
