@@ -56,14 +56,14 @@ app.controller('NoteListController', function NoteListController($scope,$http,da
       });
   }
 
-
+/*
   $scope.propertyName = 'date';
   $scope.reverse = true;
   $scope.sortBy = function(propertyName) {
     $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
     $scope.propertyName = propertyName;
   };
-
+*/
 
 
 
@@ -76,8 +76,6 @@ app.controller('TodoListController', function TodoListController($scope,$http,da
       var titletext =  dataNoteToTodo.getData();
       console.log("data from note: "+titletext);
       $scope.newtodos = { entry:titletext };
-      // var myEl = app.element( document.querySelector( '#entry' ) );
-              // $("#entry").attr("autofocus",true);
   });
 
   // switch data from todo to note
@@ -165,9 +163,8 @@ app.factory('dataTodoToNote',function($rootScope){
   return service;
 });
 
-
+/*
 app.module('utils.autofocus', [])
-
 .directive('autofocus', ['$timeout', function($timeout) {
   return {
     restrict: 'A',
@@ -178,3 +175,4 @@ app.module('utils.autofocus', [])
     }
   }
 }]);
+*/

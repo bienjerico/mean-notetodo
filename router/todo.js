@@ -21,7 +21,7 @@ module.exports = (function() {
         todos.save(function(err, docs){
           if (!err) {
             res.json(docs);
-            console.log('Now my user is saved in the database');
+            console.log(docs);
           }
         });
       });
