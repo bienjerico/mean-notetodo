@@ -2,7 +2,20 @@
 var app = angular.module('app', []);
 
 // Define the `NoteListController` controller on the `noteApp` module
-app.controller('NoteListController', function NoteListController($scope,$http) {
+app.controller('NoteListController', function NoteListController($scope,$http,dataNoteToTodo,dataTodoToNote) {
+
+  $scope.$on('data_todotonote',function(){
+      var entrytotitle =  dataTodoToNote.getData();
+      console.log("data from entry: "+entrytotitle);
+      $scope.newnotes = { title:entrytotitle };
+
+  });
+
+  // switch data from note to todo
+  $scope.switchNoteToTodo = function($scope){
+    console.log($scope.title + " " +$scope.text);
+    dataNoteToTodo.sendData($scope.title + " " +$scope.text);
+  }
 
   var displayNote = function(){
     $http.get('/api/note').success(function(res){
@@ -44,7 +57,8 @@ app.controller('NoteListController', function NoteListController($scope,$http) {
       });
   }
 
-  $scope.propertyName = 'title';
+
+  $scope.propertyName = 'date';
   $scope.reverse = true;
   $scope.sortBy = function(propertyName) {
     $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
@@ -52,10 +66,25 @@ app.controller('NoteListController', function NoteListController($scope,$http) {
   };
 
 
+
+
 });
 
 // Define the `TodoListController` controller on the `todoApp` module
-app.controller('TodoListController', function TodoListController($scope,$http) {
+app.controller('TodoListController', function TodoListController($scope,$http,dataNoteToTodo,dataTodoToNote) {
+
+  $scope.$on('data_notetotodo',function(){
+      var titletext =  dataNoteToTodo.getData();
+      console.log("data from note: "+titletext);
+      $scope.newtodos = { entry:titletext };
+
+  });
+
+  // switch data from todo to note
+  $scope.switchTodoToNote = function($scope){
+    console.log($scope.entry);
+    dataTodoToNote.sendData($scope.entry);
+  }
 
   var displayTodo = function(){
     $http.get('/api/todo').success(function(res){
@@ -107,4 +136,31 @@ app.controller('TodoListController', function TodoListController($scope,$http) {
   }
 
 
+});
+
+app.factory('dataNoteToTodo',function($rootScope){
+  var service = {};
+  service.data = false;
+  service.sendData = function(data){
+      this.data = data;
+      $rootScope.$broadcast('data_notetotodo');
+  };
+  service.getData = function(){
+    return this.data;
+  };
+  return service;
+});
+
+
+app.factory('dataTodoToNote',function($rootScope){
+  var service = {};
+  service.data = false;
+  service.sendData = function(data){
+      this.data = data;
+      $rootScope.$broadcast('data_todotonote');
+  };
+  service.getData = function(){
+    return this.data;
+  };
+  return service;
 });
