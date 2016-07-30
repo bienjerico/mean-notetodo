@@ -1,16 +1,27 @@
 {
-  "name": "mean-yoyo",
+  "name": "api-org-app",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "API Org App is [[https://github.com/yoyo-holdings][YOYO]]'s technical test.  This is a standard web application that provides a simple organizer for the user to store notes and TODOs.",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "bienjerico",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "mongoose": "^4.5.4"
-  }
+    "mongoose": "^4.5.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bienjerico/api-org-app.git"
+  },
+  "author": "bienjerico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bienjerico/api-org-app/issues"
+  },
+  "homepage": "https://github.com/bienjerico/api-org-app#readme"
 }

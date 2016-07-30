@@ -1,5 +1,5 @@
 // Define the `noteApp` module
-var app = angular.module('app', []);
+var app = angular.module('app', ['ngAnimate','ui.bootstrap']);
 
 // Define the `NoteListController` controller on the `noteApp` module
 app.controller('NoteListController', function NoteListController($scope,$http,dataNoteToTodo,dataTodoToNote) {
@@ -56,6 +56,12 @@ app.controller('NoteListController', function NoteListController($scope,$http,da
       });
   }
 
+  $scope.viewForDelete = function(id){
+    $http.get('/api/note/'+id).success(function(res) {
+        $scope.displayNote = res;
+    });
+  }
+
 /*
   $scope.propertyName = 'date';
   $scope.reverse = true;
@@ -64,10 +70,9 @@ app.controller('NoteListController', function NoteListController($scope,$http,da
     $scope.propertyName = propertyName;
   };
 */
-
-
-
 });
+
+
 
 // Define the `TodoListController` controller on the `todoApp` module
 app.controller('TodoListController', function TodoListController($scope,$http,dataNoteToTodo,dataTodoToNote) {

@@ -1,0 +1,23 @@
+{
+  "name": "api-org-app",
+  "description": "API Org App is [[https://github.com/yoyo-holdings][YOYO]]'s technical test.  This is a standard web application that provides a simple organizer for the user to store notes and TODOs.",
+  "main": "server.js",
+  "authors": [
+    "bienjerico"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/bienjerico/api-org-app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "angular-bootstrap": "^2.0.0",
+    "angular-animate": "^1.5.8"
+  }
+}
