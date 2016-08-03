@@ -1,6 +1,8 @@
 // Define the `TodoListController` controller on the `App` module
 app.controller('TodoListController', function TodoListController($scope,$uibModal,$http,dataNoteToTodo,dataTodoToNote) {
 
+  $("#todolistcontroller").show();
+
   $scope.$on('data_notetotodo',function(){
       var titletext =  dataNoteToTodo.getData();
       console.log("data from note: "+titletext);
@@ -18,6 +20,7 @@ app.controller('TodoListController', function TodoListController($scope,$uibModa
     $http.get('/api/todo').success(function(res){
       console.log("I got the data I requested");
       $scope.todos = res;
+      $scope.formTodo.$setPristine();  // reset the form validation
     });
   }
 

@@ -1,6 +1,8 @@
 // Define the `NoteListController` controller on the `App` module
 app.controller('NoteListController', function NoteListController($scope, $uibModal,$http,dataNoteToTodo,dataTodoToNote) {
 
+  $("#notelistcontroller").show();
+
   $scope.$on('data_todotonote',function(){
       var entrytotitle =  dataTodoToNote.getData();
       console.log("data from entry: "+entrytotitle);
@@ -18,6 +20,7 @@ app.controller('NoteListController', function NoteListController($scope, $uibMod
     $http.get('/api/note').success(function(res){
       console.log("I got the data I requested");
       $scope.notes = res;
+      $scope.formNote.$setPristine();  // reset the form validation
     });
   }
 
