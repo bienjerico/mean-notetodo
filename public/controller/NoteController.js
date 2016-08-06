@@ -17,20 +17,26 @@ app.controller('NoteListController', function NoteListController($scope, $uibMod
 
   // reload data binding
   var displayNote = function(){
+    console.log(3);
     $http.get('/api/note').success(function(res){
       console.log("I got the data I requested");
+      console.log(4);
       $scope.notes = res;
-      $scope.formNote.$setPristine();  // reset the form validation
-    });
+      });
   }
 
   // on load note
   displayNote();
 
   $scope.saveNewNote = function(id){
+
+    $scope.formNote.$setPristine();  // reset the form validation
+
     // save new note
     if(id == null) {
+      console.log(1);
           $http.post('/api/note',$scope.newnotes).success(function(res){
+            console.log(2);
               console.log(res);
               displayNote();
           });

@@ -20,7 +20,6 @@ app.controller('TodoListController', function TodoListController($scope,$uibModa
     $http.get('/api/todo').success(function(res){
       console.log("I got the data I requested");
       $scope.todos = res;
-      $scope.formTodo.$setPristine();  // reset the form validation
     });
   }
 
@@ -28,6 +27,9 @@ app.controller('TodoListController', function TodoListController($scope,$uibModa
   displayTodo();
 
   $scope.saveNewTodo = function(id){
+
+    $scope.formTodo.$setPristine();  // reset the form validation
+
     // new
     if(id == null) {
            $http.post('/api/todo',$scope.newtodos).success(function(response){
