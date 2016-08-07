@@ -1,4 +1,4 @@
-##To run the application:
+## To run the application:
   - kindly install MongoDB and NodeJS
   - open terminal
   - enter "npm install -g bower"
@@ -6,10 +6,10 @@
   - run "npm start" in terminal to run the application
   - open any web browser then go to "http://localhost:3000"
 
-##Desing pattern application:
+## Desing pattern application:
   - I used Basic MEAN Full Stack Development.
 
-##Libraries:
+## Libraries:
   - MongoDB, ExpressJS, AngularJS, NodeJS, Bower, Bootstrap and JQuery
     - MongoDB for database with mongoose framework to store my data
     - ExpressJS for NodeJS framework to simplify my codes
